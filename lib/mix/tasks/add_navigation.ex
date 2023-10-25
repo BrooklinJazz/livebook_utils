@@ -15,7 +15,7 @@ defmodule Mix.Tasks.AddNavigation do
     List.flatten([nil, notebooks])
     |> Enum.chunk_every(3, 1, [nil])
     |> Enum.map(fn
-      [prev, current, next] = vals ->
+      [prev, current, next] ->
         file = File.read!(Path.join(notebooks_path, current.path))
 
         file_with_nav =
