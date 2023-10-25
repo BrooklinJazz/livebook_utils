@@ -7,7 +7,7 @@ defmodule Mix.Tasks.AddNavigationTest do
   @notebooks_path Enum.random(@test_paths)
 
   setup do
-    Application.put_env(:livebook_utils, :index, "#{@notebooks_path}/index.livemd")
+    Application.put_env(:livebook_utils, :index_path, "#{@notebooks_path}/index.livemd")
     Application.put_env(:livebook_utils, :notebooks_path, @notebooks_path)
 
     on_exit(fn ->

@@ -18,13 +18,13 @@ end
 
 Configure project environment variables in your `dev.exs` file. 
 
-* `:index` the path to the index file that contains links to all project notebooks in order.
+* `:index_path` the path to the index file that contains links to all project notebooks in order.
 * `"notebooks_path` the path to the folder that contains all project notebooks. Currently, we only support one flat folder, but hope to support multiple folders in the future.
 
 ```elixir
 # Livebook Utils Configuration
 config :livebook_utils,
-  index: "guides/index.livemd",
+  index_path: "guides/index.livemd",
   notebooks_path: "guides"
 ```
 
