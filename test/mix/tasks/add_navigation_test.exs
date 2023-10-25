@@ -70,6 +70,44 @@ defmodule Mix.Tasks.AddNavigationTest do
     refute book3 =~ "Book 3"
   end
 
+  test "mix add_navigation _ only two books" do
+    File.mkdir(@notebooks_path)
+
+    index = """
+    [Book 1](book1.livemd)
+    [Book 2](book2.livemd)
+    """
+
+    File.write!("#{@notebooks_path}/index.livemd", index)
+
+    page = """
+    # Heading
+    ## Sub Heading
+    <!-- navigation-start -->
+    <!-- navigation-end -->
+    """
+
+    File.write!("#{@notebooks_path}/book1.livemd", page)
+    File.write!("#{@notebooks_path}/book2.livemd", page)
+
+    AddNavigation.run([])
+
+    book1 = File.read!("#{@notebooks_path}/book1.livemd")
+    book2 = File.read!("#{@notebooks_path}/book2.livemd")
+
+    # Ensures navigation contains correct links and titles
+
+    refute book1 =~ "book1.livemd"
+    refute book1 =~ "Book 1"
+    assert book1 =~ "book2.livemd"
+    assert book1 =~ "Book 2"
+
+    assert book2 =~ "book1.livemd"
+    assert book2 =~ "Book 1"
+    refute book2 =~ "book2.livemd"
+    refute book2 =~ "Book 2"
+  end
+
   test "add_navigation _ update multiple existing navigation" do
     File.mkdir(@notebooks_path)
 
@@ -115,6 +153,25 @@ defmodule Mix.Tasks.AddNavigationTest do
     refute book2 =~ "Book 2"
     assert book2 =~ "book3.livemd"
     assert book2 =~ "Book 3"
+  end
+
+  test "add_navigation _ one or fewer books" do
+    File.mkdir(@notebooks_path)
+
+    index = """
+    [Book 1](book1.livemd)
+    """
+
+    File.write!("#{@notebooks_path}/index.livemd", index)
+
+    page = """
+    <!-- navigation-start -->
+    <!-- navigation-end -->
+    """
+
+    assert_raise RuntimeError, "Cannot add navigation with one or fewer books", fn ->
+      AddNavigation.run([])
+    end
   end
 
   test "add_navigation _ ignore notebooks without path or title" do

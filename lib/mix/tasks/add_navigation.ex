@@ -8,7 +8,12 @@ defmodule Mix.Tasks.AddNavigation do
     notebooks_path = Application.get_env(:livebook_utils, :notebooks_path)
     index = File.read!(index_path)
     notebooks = get_notebooks(index, notebooks_path)
-    write_navigation_sections!(notebooks, notebooks_path)
+
+    if Enum.count(notebooks) <= 1 do
+      raise "Cannot add navigation with one or fewer books"
+    else
+      write_navigation_sections!(notebooks, notebooks_path)
+    end
   end
 
   defp get_notebooks(index, notebooks_path) do
