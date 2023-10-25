@@ -1,5 +1,7 @@
 defmodule Mix.Tasks.AddNavigation do
   @doc """
+  ## Usage
+
   Run the `mix add_navigation` task to automatically add navigation.
 
   Sections for navigation should be included in the notebook using the following comments:
@@ -9,23 +11,44 @@ defmodule Mix.Tasks.AddNavigation do
   <!-- navigation-end -->
   ```
 
-  This way, `livebook_utils` can update your navigation whenever your index file changes. You also have control over where navigation goes.
+  `livebook_utils` can update your navigation whenever your index file changes. You also have control over where navigation goes.
+
+  ## Template Example
   Typically, we recommend putting a navigation section at the top and the bottom of the file.
 
   Here's an example template livebook file with navigation at the top and bottom of the file.
 
   ```md
   # Title
+  ## Navigation
   <!-- navigation-start -->
   <!-- navigation-end -->
 
-  ## Subtitle
+  ## SubTitle
 
+  ## Navigation
   <!-- navigation-start -->
   <!-- navigation-end -->
+
+  ```
 
   You must have two or more notebooks in your index file with valid paths and titles to add navigation.
-  ```
+
+  ## Styling
+
+  Currently, we don't provide any control over styling the navigation section. Here's how navigation looks out of the box:
+
+  <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; font-size: 1rem; color: #61758a; background-color: #f0f5f9; height: 4rem; padding: 0 1rem; border-radius: 1rem;">
+  <div style="display: flex; margin-right: auto;">
+  <i class="ri-arrow-left-fill"></i>
+  <a style="display: flex; color: #61758a; margin-left: 1rem;" href="#">Book 3</a>
+  </div>
+  <div style="display: flex; margin-left: auto;">
+  <a style="display: flex; color: #61758a; margin-right: 1rem;" href="#">Book 1</a>
+  <i class="ri-arrow-right-fill"></i>
+  </div>
+  </div>
+
   """
   use Mix.Task
   require Logger
@@ -74,8 +97,6 @@ defmodule Mix.Tasks.AddNavigation do
   defp nav_snippet(prev, _, next) do
     """
     <!-- navigation-start -->
-    ## Navigation
-
     <div style="display: flex; align-items: center; width: 100%; justify-content: space-between; font-size: 1rem; color: #61758a; background-color: #f0f5f9; height: 4rem; padding: 0 1rem; border-radius: 1rem;">
     #{if prev, do: prev_snippet(prev)}
     #{if next, do: next_snippet(next)}

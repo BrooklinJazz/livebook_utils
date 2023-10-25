@@ -38,9 +38,22 @@ defmodule LivebookUtils.MixProject do
       logo: "assets/images/logo.png",
       extras: [
         "README.md"
-      ]
+      ],
+      before_closing_head_tag: &before_closing_head_tag/1
     ]
   end
+
+  defp before_closing_head_tag(:html) do
+    """
+    <!-- HTML injected at the end of the <head> element -->
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    """
+  end
+
+  defp before_closing_head_tag(:epub), do: ""
+
 
   # Hex package configuration
   defp package do

@@ -30,8 +30,6 @@ defmodule Mix.Tasks.AddNavigationTest do
     File.write!("#{@notebooks_path}/index.livemd", index)
 
     page = """
-    # Heading
-    ## Sub Heading
     <!-- navigation-start -->
     <!-- navigation-end -->
     """
@@ -81,8 +79,6 @@ defmodule Mix.Tasks.AddNavigationTest do
     File.write!("#{@notebooks_path}/index.livemd", index)
 
     page = """
-    # Heading
-    ## Sub Heading
     <!-- navigation-start -->
     <!-- navigation-end -->
     """
@@ -120,7 +116,6 @@ defmodule Mix.Tasks.AddNavigationTest do
     File.write!("#{@notebooks_path}/index.livemd", index)
 
     page = """
-    # Heading
     <!-- navigation-start -->
       Old Navigation
     <!-- navigation-end -->
