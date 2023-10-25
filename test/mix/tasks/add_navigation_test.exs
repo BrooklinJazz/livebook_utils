@@ -9,6 +9,7 @@ defmodule Mix.Tasks.AddNavigationTest do
   setup do
     Application.put_env(:livebook_utils, :index, "#{@notebooks_path}/index.livemd")
     Application.put_env(:livebook_utils, :notebooks_path, @notebooks_path)
+
     on_exit(fn ->
       # notebook created must be deleted
       File.rm_rf!(@notebooks_path)
@@ -101,11 +102,11 @@ defmodule Mix.Tasks.AddNavigationTest do
 
     # Ensures content was not overwritten.
     assert Regex.scan(~r/navigation-(end|start)/, book2) |> Enum.map(&hd/1) == [
-      "navigation-start",
-      "navigation-end",
-      "navigation-start",
-      "navigation-end",
-    ]
+             "navigation-start",
+             "navigation-end",
+             "navigation-start",
+             "navigation-end"
+           ]
 
     # Ensures navigation includes correct links and titles
     assert book2 =~ "book1.livemd"

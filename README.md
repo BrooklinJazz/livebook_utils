@@ -16,10 +16,16 @@ def deps do
 end
 ```
 
-Configure project environment variables in your `dev.exs` file.
+Configure project environment variables in your `dev.exs` file. 
 
-```
+* `:index` the path to the index file that contains links to all project notebooks in order.
+* `"notebooks_path` the path to the folder that contains all project notebooks. Currently, we only support one flat folder, but hope to support multiple folders in the future.
 
+```elixir
+# Livebook Utils Configuration
+config :livebook_utils,
+  index: "guides/index.livemd",
+  notebooks_path: "guides"
 ```
 
 ## Index
@@ -38,6 +44,10 @@ These links may be in any format or order as long as they match the regular expr
 
 ## Tasks
 
+To see implementation details, go to `lib/mix/tasks`.
+
+Below we document each task, and any necessary requirements.
+
 ### add_navigation
 
 Run the `mix add_navigation` task to automatically add navigation.
@@ -49,4 +59,5 @@ Sections for navigation should be included in the notebook using the following c
 <!-- navigation-end -->
 ```
 
-This way, navigation can be automatically updated whenever your index file changes.
+This way, `livebook_utils` can update your navigation whenever your index file changes. You also have control over where navigation goes.
+Typically, we recommend putting a navigation section at the top and the bottom of the file.
