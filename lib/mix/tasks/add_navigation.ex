@@ -11,11 +11,16 @@ defmodule Mix.Tasks.AddNavigation do
     notebooks =
       Regex.scan(~r/\[(.*)\]\((.*)\)/, index)
       |> Enum.map(fn [_, title, path] -> %{path: path, title: title} end)
+      |> Enum.filter(fn %{path: path, title: title} ->
+        String.contains?(path, ".livemd") and File.exists?(Path.join(notebooks_path, path)) and
+          title != ""
+      end)
 
     List.flatten([nil, notebooks])
     |> Enum.chunk_every(3, 1, [nil])
     |> Enum.map(fn
       [prev, current, next] ->
+        dbg()
         file = File.read!(Path.join(notebooks_path, current.path))
 
         file_with_nav =
