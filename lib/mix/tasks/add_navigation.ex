@@ -2,9 +2,6 @@ defmodule Mix.Tasks.AddNavigation do
   use Mix.Task
   require Logger
 
-  @readme_path "README.md"
-  @ignored_sections ["## Prerequisites"]
-
   def run(_args) do
     Logger.info("Adding Navigation")
     index_path = Application.get_env(:livebook_utils, :index)
@@ -23,7 +20,7 @@ defmodule Mix.Tasks.AddNavigation do
 
         file_with_nav =
           Regex.replace(
-            ~r/<!-- navigation-start -->(?:.|\n)*<!-- navigation-end -->/,
+            ~r/<!-- navigation-start -->(?:.|\n)*?<!-- navigation-end -->/,
             file,
             nav_snippet(prev, current, next)
           )
