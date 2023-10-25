@@ -1,4 +1,32 @@
 defmodule Mix.Tasks.AddNavigation do
+  @doc """
+  Run the `mix add_navigation` task to automatically add navigation.
+
+  Sections for navigation should be included in the notebook using the following comments:
+
+  ```md
+  <!-- navigation-start -->
+  <!-- navigation-end -->
+  ```
+
+  This way, `livebook_utils` can update your navigation whenever your index file changes. You also have control over where navigation goes.
+  Typically, we recommend putting a navigation section at the top and the bottom of the file.
+
+  Here's an example template livebook file with navigation at the top and bottom of the file.
+
+  ```md
+  # Title
+  <!-- navigation-start -->
+  <!-- navigation-end -->
+
+  ## Subtitle
+
+  <!-- navigation-start -->
+  <!-- navigation-end -->
+
+  You must have two or more notebooks in your index file with valid paths and titles to add navigation.
+  ```
+  """
   use Mix.Task
   require Logger
 

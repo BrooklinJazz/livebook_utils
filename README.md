@@ -43,23 +43,3 @@ For example
 ```
 
 These links may be in any format or order as long as they match the regular expression we use to find links.
-
-## Tasks
-
-To see implementation details, go to `lib/mix/tasks`.
-
-Below we document each task, and any necessary requirements.
-
-### add_navigation
-
-Run the `mix add_navigation` task to automatically add navigation.
-
-Sections for navigation should be included in the notebook using the following comments:
-
-```md
-<!-- navigation-start -->
-<!-- navigation-end -->
-```
-
-This way, `livebook_utils` can update your navigation whenever your index file changes. You also have control over where navigation goes.
-Typically, we recommend putting a navigation section at the top and the bottom of the file.
