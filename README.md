@@ -1,3 +1,5 @@
+[![Hex.pm](https://img.shields.io/hexpm/v/livebook_utils.svg)](https://hex.pm/packages/livebook_utils) [![Documentation](https://img.shields.io/badge/documentation-gray)](https://hexdocs.pm/livebook_utils/0.1.0/readme.html)
+
 # LivebookUtils
 
 LivebookUtils is an experimental collection of utility tasks and modules that make managing a complex Livebook project easier.
